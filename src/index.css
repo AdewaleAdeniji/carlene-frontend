@@ -1,0 +1,11 @@
+@import url('./styles/style.css');
+/* html, body, .chakra-heading, .chakra-text {
+  font-family: 'Playfair Display', serif;
+}
+#root {
+  font-family: 'Playfair Display', serif;
+} */
+
+.hide {
+  display: none;
+} 
