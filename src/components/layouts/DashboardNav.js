@@ -50,7 +50,7 @@ const DashboardNav = ({ setOpenMenu }) => {
             </button>
             <a href="/app/dashboard" className="flex ml-2 md:mr-24">
               <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                AppName
+                Carlene
               </span>
             </a>
             <form className="hidden lg:block lg:pl-3.5">
