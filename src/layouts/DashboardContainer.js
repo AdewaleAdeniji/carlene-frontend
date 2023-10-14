@@ -13,10 +13,10 @@ const DashboardContainer = ({ children }) => {
         <Sidebar openMenu={openMenu} />
         <div
         id="main-content"
-        class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900 py-5"
+        className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900 py-5"
       >
         <main>
-            <div class="px-4 pt-6">
+            <div className="px-4 pt-6">
         {children}
         </div>
         </main>

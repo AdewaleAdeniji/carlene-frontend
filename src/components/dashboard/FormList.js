@@ -1,17 +1,14 @@
 import FormItem from "./FormItem";
 
-const FormList = ({ isData, list }) => {
+const FormList = ({ list }) => {
   return (
     <ul className="divide-y divide-gray-200 dark:divide-gray-700">
       {list.map((item, index) => {
         return (
           <FormItem
-            title={"Hey"}
-            count={"50"}
-            dateCreated={"shdjdjd"}
-            waitlistID={"hdjdjd"}
-            isData={false}
-            dataJSON={"jdjd"}
+            title={item?.carModel + ' ' + item?.carMake + ' ' + item?.carYear}
+            details={item?.carColor + ' ' + item?.carType}
+            itemID={item?.carID}
             key={index}
           />
         );

@@ -20,23 +20,13 @@ export default function NavBar() {
                 fontSize: "25px",
               }}
             >
-              AppName
+              Carlene
             </Box>
           </Link>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-            <Button
-                bg={"white.400"}
-                rounded={"full"}
-                px={6}
-                _hover={{
-                  bg: "blue.500",
-                }}
-                onClick={() => (window.location.href = "/auth/signup")}
-              >
-              Dodo
-              </Button>
+            
           
               <Button
                 colorScheme={"blue"}
@@ -48,7 +38,7 @@ export default function NavBar() {
                 }}
                 onClick={() => (window.location.href = "/auth/signup")}
               >
-                Plantain
+                Get started
               </Button>
             </Stack>
           </Flex>

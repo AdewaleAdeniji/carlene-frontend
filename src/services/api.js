@@ -10,7 +10,7 @@ export const LogUserIn = (userObj) => {
   localStorage.setItem('token', userObj.token);
 }
 export const RedirectToLoginPage  = () => {
-  return false;
+  // return false;
   window.location.href = "/auth/login";
 }
 export const LogUserOut = () => {
@@ -31,7 +31,7 @@ export const Register = async (payload) => {
   var data = JSON.stringify(payload);
   var config = {
     method: "post",
-    url: `${configs.USER_SERVICE_URL}/auth/register`,
+    url: `${configs.API_BASE_URL}/auth/register`,
     headers: {
       appKey: configs.USER_SERVICE_KEY,
       "Content-Type": "application/json",
@@ -54,14 +54,10 @@ export const Register = async (payload) => {
 };
 
 export const Login = async (payload) => {
-  // {
-  //     email: "devferanmi@gmail.com",
-  //     password: "password",
-  //   }
   var data = JSON.stringify(payload);
   var config = {
     method: "post",
-    url: `${configs.USER_SERVICE_URL}/auth/login`,
+    url: `${configs.API_BASE_URL}/auth/login`,
     headers: {
       appKey: configs.USER_SERVICE_KEY,
       "Content-Type": "application/json",
@@ -91,11 +87,11 @@ export const getTokenFromLocal = () => {
   return token;
 };
 
-export const getWaitlistForms = async () => {
+export const getUserCars = async () => {
   const token = await getTokenFromLocal();
   var config = {
     method: "get",
-    url: `${configs.API_BASE_URL}/waitlists`,
+    url: `${configs.API_BASE_URL}/user/cars`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -108,18 +104,18 @@ export const getWaitlistForms = async () => {
       ...req.data,
     };
   }  catch (err) {
-    //handleStatusCode(err?.response?.status);
+    handleStatusCode(err?.response?.status);
     return {
       success: false,
       message: err?.response?.data?.message || "Request failed ",
     };
   }
 };
-export const getAPIKeys = async () => {
+export const getCarDetails = async (carID) => {
   const token = await getTokenFromLocal();
   var config = {
     method: "get",
-    url: `${configs.API_BASE_URL}/keys`,
+    url: `${configs.API_BASE_URL}/user/car/${carID}/details`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -132,18 +128,18 @@ export const getAPIKeys = async () => {
       ...req.data,
     };
   }  catch (err) {
-    //handleStatusCode(err?.response?.status);
+    handleStatusCode(err?.response?.status);
     return {
       success: false,
       message: err?.response?.data?.message || "Request failed ",
     };
   }
 };
-export const getWaitlist = async (waitlistID) => {
+export const getCarMaintenanceDetails = async (carID, maintenanceId) => {
   const token = await getTokenFromLocal();
   var config = {
     method: "get",
-    url: `${configs.API_BASE_URL}/waitlists/data/${waitlistID}`,
+    url: `${configs.API_BASE_URL}/maintenances/${carID}/${maintenanceId}`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -156,24 +152,23 @@ export const getWaitlist = async (waitlistID) => {
       ...req.data,
     };
   }  catch (err) {
-    //handleStatusCode(err?.response?.status);
+    handleStatusCode(err?.response?.status);
     return {
       success: false,
       message: err?.response?.data?.message || "Request failed ",
     };
   }
 };
-export const createWaitlist = async (payload) => {
+export const addMaintenance = async (payload) => {
   const token = await getTokenFromLocal();
-  var data = JSON.stringify(payload);
   var config = {
     method: "post",
-    url: `${configs.API_BASE_URL}/waitlist/create`,
+    url: `${configs.API_BASE_URL}/maintenances/${payload?.carID}/${payload?.maintenanceType}`,
+    data: payload,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    data: data,
   };
   try {
     const req = await axios(config);
@@ -182,13 +177,41 @@ export const createWaitlist = async (payload) => {
       ...req.data,
     };
   }  catch (err) {
-    //handleStatusCode(err?.response?.status);
+    console.log(err)
+    handleStatusCode(err?.response?.status);
     return {
       success: false,
       message: err?.response?.data?.message || "Request failed ",
     };
   }
 };
+export const addCar = async (payload) => {
+  const token = await getTokenFromLocal();
+  var config = {
+    method: "post",
+    url: `${configs.API_BASE_URL}/user/cars/add`,
+    data: payload,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const req = await axios(config);
+    return {
+      success: true,
+      ...req.data,
+    };
+  }  catch (err) {
+    console.log(err)
+    handleStatusCode(err?.response?.status);
+    return {
+      success: false,
+      message: err?.response?.data?.message || "Request failed ",
+    };
+  }
+};
+
 export const handleStatusCode = (statusCode) => {
   if(statusCode === 403){
     RedirectToLoginPage();

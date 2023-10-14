@@ -9,6 +9,7 @@ import ListPage from "../pages/user/listPage";
 import NotFoundPage from "../pages/404";
 import CreatePage from "../pages/user/createForm";
 import SettingsPage from "../pages/user/settings";
+import MaintenancePage from "../pages/user/maintenancePage";
 
 const router = createBrowserRouter([
   {
@@ -28,15 +29,19 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "/app/waitlists",
+    path: "/app/cars",
     element: <ListsPage />,
   },
   {
-    path: "/app/waitlist/:waitlistID",
+    path: "/app/car/:carID",
     element: <ListPage />,
   },
   {
-    path: "/app/waitlist",
+    path: "/app/car/:carID/:maintenanceId",
+    element: <MaintenancePage />,
+  },
+  {
+    path: "/app/car",
     element: <CreatePage />,
   },
   {

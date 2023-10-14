@@ -10,7 +10,7 @@ const LinkItem = ({ title, path, icon, currentPath }) => {
       }`}
     >
       {icon}
-      <span className="ml-3" sidebar-toggle-item>
+      <span className="ml-3">
         {title}
       </span>
     </Link>

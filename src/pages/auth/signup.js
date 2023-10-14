@@ -53,6 +53,7 @@ import {
       }
       // all good
       setLoading(true);
+      payload.username = payload.firstName;
       const api = await Register(payload);
       setLoading(false);
       if(!api.success){
